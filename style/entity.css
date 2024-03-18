@@ -1,0 +1,33 @@
+entity {
+	z-index: 2;
+	position: absolute;
+
+	left: calc(var(--size) * var(--x, 0));
+	top: calc(var(--size) * var(--y, 0));
+
+	width: var(--size);
+	height: var(--size);
+
+	background-size: auto var(--size);
+	background-position: calc(var(--size) * -1) 0; /* Центральный кадр */
+	image-rendering: pixelated;
+
+	transition: top  var(--step-duration, 0) linear,
+				left var(--step-duration, 0) linear;
+}
+
+entity[action=walking] { animation: walk 1s    steps(1) infinite; }
+entity[action=running] { animation: walk 0.75s steps(1) infinite; }
+
+@keyframes walk {
+	0%   { background-position-x: 0; }
+	25%  { background-position-x: calc(var(--size) * -1); }
+	50%  { background-position-x: calc(var(--size) * -2); }
+	75%  { background-position-x: calc(var(--size) * -1); }
+	100% { background-position-x: 0; }
+}
+
+
+entity[type=cat] {
+	background-image: url(../assets/cat/walking/e.png); /* Спрайт по умолчанию */
+}

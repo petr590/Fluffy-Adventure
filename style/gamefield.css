@@ -1,0 +1,64 @@
+html, body {
+	height: 100%;
+}
+
+#main {
+	width: 100%;
+	height: 100%;
+	background-color: gray;
+
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#gamefield {
+	--size: 64px; /* Размер тайла */
+	position: relative;
+	width: fit-content;
+}
+
+#gamefield > .row {
+	width: fit-content;
+	flex-wrap: nowrap;
+}
+
+
+/* -------------------------------------------------- field -------------------------------------------------- */
+field {
+	width: var(--size);
+	height: var(--size);
+
+	position: relative;
+
+	background-image: var(--texture);
+	background-size: 100%;
+	image-rendering: pixelated;
+
+	/* Рандомизация (значения переменных генерируются на js) */
+	transform: rotate(calc(90deg * var(--rotation, 0)));
+}
+
+field::before {
+	z-index: 1;
+	content: '';
+	position: absolute;
+	top: -100%; bottom: 0;
+	left: -100%; right: 0;
+
+	background-image: var(--texture);
+	background-size: 50%;
+
+	/* Рандомизация (значения переменных генерируются на js) */
+	transform-origin: 75% 75%;
+	background-position: calc(var(--size) * var(--off-x, 0)) calc(var(--size) * var(--off-y, 0));
+	transform: rotate(calc(90deg * var(--rotation, 0) * -1));
+	mask: url('../assets/env/mask.png') 0 / 100%;
+}
+
+field[type=grass]     { --texture: url('../assets/env/grass.png');     }
+field[type=moss]      { --texture: url('../assets/env/moss.png');      }
+field[type=sand]      { --texture: url('../assets/env/sand.png');      }
+field[type=beachsand] { --texture: url('../assets/env/beachsand.png'); }
+field[type=water]     { --texture: url('../assets/env/water.gif');     }
