@@ -1,237 +1,263 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
 	<title>Cat</title>
 
 	<link rel="stylesheet" href="style/mini-dark.min.css">
 	<link rel="stylesheet" href="style/gamefield.css">
 	<link rel="stylesheet" href="style/entity.css">
+	<link rel="stylesheet" href="style/gui.css">
 
 	<script src="script/jquery-3.6.0.min.js"></script>
 	<script type="module" src="script/setup.js"></script>
+	<script type="module" src="script/gui.js"></script>
 </head>
 <body>
-	<div id="main">
+	<header>
+		<label for="controls-modal" class="circle-border">?</label>
+
+		<input type="checkbox" id="controls-modal" class="modal">
+		<div>
+			<div class="card fluid">
+				<label for="controls-modal" class="modal-close"></label>
+				<h3 class="section">Управление:</h3>
+				<div class="section">
+					<p>Перемещение стрелками (в том числе и по диагонали)</p>
+					<p>Ctrl - бег</p>
+					<p>Shift - сесть</p>
+				</div>
+				<div class="section center-content">
+					<label for="controls-modal">Ок</label>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
 		<div id="gamefield">
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="moss"></field>
-				<field type="moss"></field>
-				<field type="grass"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="sand"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="beachsand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-			</div>
-			<div class="row">
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="grass"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="water"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="beachsand"></field>
-				<field type="sand"></field>
-				<field type="sand"></field>
+			<div id="landscape">
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="moss"></field>
+					<field type="moss"></field>
+					<field type="grass"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="sand"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="beachsand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+				</div>
+				<div class="row">
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="grass"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="water"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="beachsand"></field>
+					<field type="sand"></field>
+					<field type="sand"></field>
+				</div>
 			</div>
 	
-			<entity type="cat" id="player" dir="e"></entity>
+			<entity type="cat" id="player" x="2" y="1" dir="se" sitting="true"></entity>
 		</div>
-	</div>
+	</main>
 </body>
 </html>

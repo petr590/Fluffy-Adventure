@@ -4,6 +4,9 @@ export class Game {
 	/** @type {jQuery} */
 	#gameField
 
+	/** @type {jQuery} */
+	#rows
+
 	/** @type {number} */
 	#width
 
@@ -17,12 +20,13 @@ export class Game {
 
 	constructor(gameField) {
 		this.#gameField = gameField
-		this.entities = new Array(gameField.children('entity')).map(createEntity)
+		this.entities = new Array(gameField.children('entity')).map(element => createEntity(element, this))
 
-		let rows = gameField.children('.row')
+		this.#rows = gameField.find('#landscape').children('.row')
+		this.#rows.each((_, row) => row.fields = $(row).children('field'))
 
-		this.#height = rows.length
-		this.#width = Math.max(...rows.map((_, row) => $(row).children('field').length))
+		this.#height = this.#rows.length
+		this.#width = Math.max(...this.#rows.map((_, row) => $(row).children('field').length))
 	}
 
 	get gameField() {
@@ -39,6 +43,25 @@ export class Game {
 
 	get tick() {
 		return this.#tick
+	}
+
+	/** @param {number} x */
+	normalizeX(x) {
+		return Math.min(Math.max(x, 0), this.width - 1)
+	}
+
+	/** @param {number} y */
+	normalizeY(y) {
+		return Math.min(Math.max(y, 0), this.height - 1)
+	}
+
+	/**
+	 * @param {number} x
+	 * @param {number} y
+	 * @returns {Element}
+	 */
+	get(x, y) {
+		return this.#rows[y]?.fields[x]
 	}
 
 	update() {

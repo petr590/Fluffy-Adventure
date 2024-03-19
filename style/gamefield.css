@@ -2,10 +2,9 @@ html, body {
 	height: 100%;
 }
 
-#main {
+main {
 	width: 100%;
 	height: 100%;
-	background-color: gray;
 
 	display: flex;
 	flex-flow: column;
@@ -19,7 +18,14 @@ html, body {
 	width: fit-content;
 }
 
-#gamefield > .row {
+
+#landscape {
+	position: relative;
+	top: calc(var(--size) * 0.15);
+	left: calc(var(--size) * 0.15);
+}
+
+#landscape > .row {
 	width: fit-content;
 	flex-wrap: nowrap;
 }
@@ -30,17 +36,25 @@ field {
 	width: var(--size);
 	height: var(--size);
 
-	position: relative;
-
-	background-image: var(--texture);
-	background-size: 100%;
 	image-rendering: pixelated;
-
-	/* Рандомизация (значения переменных генерируются на js) */
-	transform: rotate(calc(90deg * var(--rotation, 0)));
+	position: relative;
 }
 
 field::before {
+	z-index: 0;
+	content: '';
+	position: absolute;
+	top: 0; bottom: 0; left: 0; right: 0;
+
+	background-image: var(--texture);
+	background-size: 100%;
+
+	/* Рандомизация (значения переменных генерируются на js) */
+	background-position: calc(var(--size) * var(--off-x, 0)) calc(var(--size) * var(--off-y, 0));
+	transform: rotate(calc(90deg * var(--rotation, 0)));
+}
+
+field::after {
 	z-index: 1;
 	content: '';
 	position: absolute;
@@ -50,10 +64,6 @@ field::before {
 	background-image: var(--texture);
 	background-size: 50%;
 
-	/* Рандомизация (значения переменных генерируются на js) */
-	transform-origin: 75% 75%;
-	background-position: calc(var(--size) * var(--off-x, 0)) calc(var(--size) * var(--off-y, 0));
-	transform: rotate(calc(90deg * var(--rotation, 0) * -1));
 	mask: url('../assets/env/mask.png') 0 / 100%;
 }
 

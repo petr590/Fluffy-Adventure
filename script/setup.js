@@ -1,12 +1,12 @@
 import {game} from './game.js'
 import {getSpritePath, entityByType} from './entity/index.js';
-import {TICK_TIME, TEXTURE_SIZE, RANDOM_TEXTURES, DIRECTRIONS, ACTIONS} from './config.js';
+import {TICK_TIME, TEXTURE_SIZE, RANDOM_TEXTURES, DIRECTRIONS, ACTIONS, ATTR_TYPE} from './config.js';
 
 // Рандомное смещение текстур
 for (let texture in RANDOM_TEXTURES) {
 	let config = RANDOM_TEXTURES[texture]
 
-	let fields = $(`field[type=${texture}]`)
+	let fields = $(`field[${ATTR_TYPE}=${texture}]`)
 
 	fields.each((_, field) => {
 		field = $(field)
@@ -32,7 +32,7 @@ for (let type in entityByType) {
 		for (let dir of DIRECTRIONS) {
 			let img = document.createElement('img')
 			img.src = getSpritePath(type, action, dir)
-			console.log(img.src);
+			// console.log(img.src)
 		}
 	}
 }

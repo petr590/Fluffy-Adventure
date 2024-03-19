@@ -10,15 +10,19 @@ export const RANDOM_TEXTURES = {
 	moss:  defaultTextureConfig,
 	sand:  defaultTextureConfig,
 	beachsand: { rotate180: true },
-	water:     { rotate180: true },
 }
 
 export const DIRECTRIONS = [ 'n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw' ]
 
 export const Actions = {
-	WALKING: 'walking',
-	RUNNING: 'running',
-	SITTING: 'sitting',
+	WALKING:  'walking',
+	RUNNING:  'running',
+	SITTING:  'sitting',
+	SWIMMING: 'swimming',
 }
 
 export const ACTIONS = Object.values(Actions)
+
+export const ATTR_DIR = 'dir',
+			 ATTR_TYPE = 'type',
+			 ATTR_ACTION = 'action'

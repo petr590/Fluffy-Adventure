@@ -1,5 +1,5 @@
 import {Controller, EmptyController, PlayerController} from '../controller/index.js';
-import {TICK_TIME, Actions} from '../config.js';
+import {TICK_TIME, Actions, ATTR_DIR, ATTR_TYPE, ATTR_ACTION} from '../config.js';
 
 /**
  * @param {string} type тип entity
@@ -26,11 +26,14 @@ export class Entity {
 	/** @type {Controller} */
 	#controller
 
-	constructor(element) {
+	constructor(element, game) {
 		this.#element = element
 
+		this.x = Number(element.attr('x')) ?? 0
+		this.y = Number(element.attr('y')) ?? 0
+
 		if (!Entity.#playerFound && element.attr('id') == 'player') {
-			this.#controller = new PlayerController()
+			this.#controller = new PlayerController(this, game)
 			Entity.#playerFound = true
 
 		} else {
@@ -66,9 +69,9 @@ export class Entity {
 	updateSprite() {
 		const element = this.#element
 
-		let dir = element.attr('dir'),
-			type = element.attr('type'),
-			action = element.attr('action') ?? Actions.WALKING
+		let dir = element.attr(ATTR_DIR),
+			type = element.attr(ATTR_TYPE),
+			action = element.attr(ATTR_ACTION) ?? Actions.WALKING
 		
 		element.css('background-image', type && action && dir ? `url("${getSpritePath(type, action, dir)}")` : '')
 	}
@@ -81,17 +84,17 @@ export class Entity {
 		if (step == null || --step.duration <= 0) {
 
 			if (step != null) {
-				this.#element.removeAttr('action').css('--step-duration', '0')
+				this.#element.removeAttr(ATTR_ACTION).css('--step-duration', '0')
 				this.updateSprite()
 			}
 
 			this.#step = step = this.#controller.getStep()
 
 			if (step != null) {
-				this.x = Math.min(Math.max(this.x + step.dx, 0), game.width - 1)
-				this.y = Math.min(Math.max(this.y + step.dy, 0), game.height - 1)
+				this.x = game.normalizeX(this.x + step.dx)
+				this.y = game.normalizeY(this.y + step.dy)
 
-				this.#element.attr('action', step.action).css('--step-duration', step.duration * TICK_TIME + 'ms')
+				this.#element.attr(ATTR_ACTION, step.action).css('--step-duration', step.duration * TICK_TIME + 'ms')
 
 				let dir = ''
 
@@ -106,10 +109,14 @@ export class Entity {
 				}
 
 				if (dir != '') {
-					this.#element.attr('dir', dir)
+					this.#element.attr(ATTR_DIR, dir)
 				}
 
 				this.updateSprite()
+
+				if (step.duration == 0) {
+					this.#step = null
+				}
 			}
 		}
 	}
