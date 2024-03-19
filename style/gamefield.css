@@ -3,8 +3,10 @@ html, body {
 }
 
 main {
-	width: 100%;
-	height: 100%;
+	--size: 64px; /* Размер тайла */
+	--landscape-offset: calc(var(--size) * 0.15);
+
+	padding: calc(var(--landscape-offset) + 1rem);
 
 	display: flex;
 	flex-flow: column;
@@ -13,7 +15,6 @@ main {
 }
 
 #gamefield {
-	--size: 64px; /* Размер тайла */
 	position: relative;
 	width: fit-content;
 }
@@ -21,8 +22,8 @@ main {
 
 #landscape {
 	position: relative;
-	top: calc(var(--size) * 0.15);
-	left: calc(var(--size) * 0.15);
+	top: var(--landscape-offset);
+	left: var(--landscape-offset);
 }
 
 #landscape > .row {
@@ -54,17 +55,42 @@ field::before {
 	transform: rotate(calc(90deg * var(--rotation, 0)));
 }
 
-field:not(.no-border)::after {
+field::after {
 	z-index: 1;
 	content: '';
 	position: absolute;
+
 	top: -100%; bottom: 0;
 	left: -100%; right: 0;
 
 	background-image: var(--texture);
 	background-size: 50%;
 
-	mask: url('../assets/env/mask.png') 0 / 100%;
+	mask-image: url('../assets/env/mask.png');
+	mask-size: 100%;
+}
+
+field:last-child::after,
+#landscape > .row:last-child > field::after {
+	bottom: -100%;
+	right: -100%;
+	background-size: 33.3%;
+}
+
+field:last-child::after {
+	mask-image: url('../assets/env/mask-right.png');
+}
+
+#landscape > .row:last-child > field::after {
+	mask-image: url('../assets/env/mask-down.png');
+}
+
+#landscape > .row:last-child > field:last-child::after {
+	mask-image: url('../assets/env/mask-right-down.png');
+}
+
+field.no-border::after {
+	background: none;
 }
 
 field[type=grass]     { --texture: url('../assets/env/grass.png');     }

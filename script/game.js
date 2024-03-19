@@ -17,8 +17,6 @@ export class Game {
 	/** @type {Entity[]} */
 	entities = []
 
-	#tick = 0
-
 	constructor(gameField) {
 		this.#gameField = gameField
 		this.entities = new Array(gameField.children('entity')).map(element => createEntity(element, this))
@@ -30,8 +28,8 @@ export class Game {
 		this.#width = Math.max(...this.#rows.map((_, row) => $(row).children('field').length))
 
 		// Оптимизация текстур
-		for (let x = 1, w = this.#width; x < w; x++) {
-			for (let y = 1, h = this.#height; y < h; y++) {
+		for (let x = 1, w = this.#width - 1; x < w; x++) {
+			for (let y = 1, h = this.#height - 1; y < h; y++) {
 
 				let field = this.get(x, y)
 				let type = field.getAttribute(ATTR_TYPE)
@@ -57,10 +55,6 @@ export class Game {
 		return this.#height
 	}
 
-	get tick() {
-		return this.#tick
-	}
-
 	/** @param {number} x */
 	normalizeX(x) {
 		return Math.min(Math.max(x, 0), this.width - 1)
@@ -82,7 +76,6 @@ export class Game {
 
 	update() {
 		this.entities.forEach(entity => entity.update(this))
-		this.#tick++
 	}
 }
 
