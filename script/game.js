@@ -1,3 +1,4 @@
+import { ATTR_TYPE } from './config.js'
 import {Entity, createEntity} from './entity/index.js'
 
 export class Game {
@@ -27,6 +28,21 @@ export class Game {
 
 		this.#height = this.#rows.length
 		this.#width = Math.max(...this.#rows.map((_, row) => $(row).children('field').length))
+
+		// Оптимизация текстур
+		for (let x = 1, w = this.#width; x < w; x++) {
+			for (let y = 1, h = this.#height; y < h; y++) {
+
+				let field = this.get(x, y)
+				let type = field.getAttribute(ATTR_TYPE)
+
+				if (type == this.get(x - 1, y).getAttribute(ATTR_TYPE) &&
+					type == this.get(x, y - 1).getAttribute(ATTR_TYPE)) {
+					
+					field.classList.add('no-border')
+				}
+			}
+		}
 	}
 
 	get gameField() {

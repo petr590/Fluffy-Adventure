@@ -54,7 +54,7 @@ field::before {
 	transform: rotate(calc(90deg * var(--rotation, 0)));
 }
 
-field::after {
+field:not(.no-border)::after {
 	z-index: 1;
 	content: '';
 	position: absolute;

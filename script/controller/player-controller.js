@@ -67,6 +67,7 @@ export class PlayerController extends Controller {
 					this.#sitting = !this.#sitting &&
 							this.#dx == 0 && this.#dy == 0 &&
 							!this.isWater(entity.x, entity.y)
+					break
 					
 				default: return
 			}

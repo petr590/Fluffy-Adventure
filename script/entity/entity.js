@@ -89,6 +89,7 @@ export class Entity {
 			}
 
 			this.#step = step = this.#controller.getStep()
+			// console.log(step);
 
 			if (step != null) {
 				this.x = game.normalizeX(this.x + step.dx)
@@ -111,12 +112,13 @@ export class Entity {
 				if (dir != '') {
 					this.#element.attr(ATTR_DIR, dir)
 				}
+			}
+			
+			this.updateSprite()
 
-				this.updateSprite()
-
-				if (step.duration == 0) {
-					this.#step = null
-				}
+			if (step?.duration == 0) {
+				this.#step = null
+				this.#element.removeAttr(ATTR_ACTION).css('--step-duration', '0')
 			}
 		}
 	}
