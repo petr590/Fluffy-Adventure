@@ -7,8 +7,8 @@ import {TICK_TIME, Actions, ATTR_DIR, ATTR_TYPE, ATTR_ACTION} from '../config.js
  * @param {string} dir направление entity
  * @returns {string} путь к спрайту (относительно index.html)
  */
-export function getSpritePath(type, action, dir) {
-	return `assets/${type}/${action}/${dir}.png`
+export function getSpritePath(type, action) {
+	return `assets/${type}/${action}.png`
 }
 
 
@@ -69,11 +69,10 @@ export class Entity {
 	updateSprite() {
 		const element = this.#element
 
-		let dir = element.attr(ATTR_DIR),
-			type = element.attr(ATTR_TYPE),
+		let type = element.attr(ATTR_TYPE),
 			action = element.attr(ATTR_ACTION) ?? Actions.WALKING
 		
-		element.css('background-image', type && action && dir ? `url("${getSpritePath(type, action, dir)}")` : '')
+		element.css('background-image', type && action ? `url("${getSpritePath(type, action)}")` : '')
 	}
 
 
@@ -113,7 +112,7 @@ export class Entity {
 					this.#element.attr(ATTR_DIR, dir)
 				}
 			}
-			
+
 			this.updateSprite()
 
 			if (step?.duration == 0) {

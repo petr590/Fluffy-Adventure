@@ -1,6 +1,6 @@
 import {game} from './game.js'
 import {getSpritePath, entityByType} from './entity/index.js';
-import {TICK_TIME, TEXTURE_SIZE, RANDOM_TEXTURES, DIRECTRIONS, ACTIONS, ATTR_TYPE} from './config.js';
+import {TICK_TIME, TEXTURE_SIZE, RANDOM_TEXTURES, ACTIONS, ATTR_TYPE} from './config.js';
 
 // Рандомное смещение текстур
 for (let texture in RANDOM_TEXTURES) {
@@ -27,11 +27,9 @@ for (let texture in RANDOM_TEXTURES) {
 // Предзагрузка спрайтов для избежания задержек
 for (let type in entityByType) {
 	for (let action of ACTIONS) {
-		for (let dir of DIRECTRIONS) {
-			let img = document.createElement('img')
-			img.src = getSpritePath(type, action, dir)
-			// console.log(img.src)
-		}
+		let img = document.createElement('img')
+		img.src = getSpritePath(type, action)
+		// console.log(img.src)
 	}
 }
 

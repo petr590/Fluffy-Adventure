@@ -8,7 +8,7 @@ entity {
 	width: var(--size);
 	height: var(--size);
 
-	background-size: auto var(--size);
+	background-size: auto calc(var(--size) * 8);
 	background-position: calc(var(--size) * -1) 0; /* Центральный кадр */
 	image-rendering: pixelated;
 
@@ -16,8 +16,18 @@ entity {
 				left var(--step-duration, 0) linear;
 }
 
-entity[action=walking] { animation: walk 1s    steps(1) infinite; }
-entity[action=running] { animation: walk 0.75s steps(1) infinite; }
+entity[action=walking]  { animation: walk 1s    steps(1) infinite; }
+entity[action=running]  { animation: walk 0.75s steps(1) infinite; }
+entity[action=swimming] { animation: walk 1.25s steps(1) infinite; }
+
+entity[dir=n]  { background-position-y: 0; }
+entity[dir=s]  { background-position-y: calc(var(--size) * -1); }
+entity[dir=w]  { background-position-y: calc(var(--size) * -2); }
+entity[dir=e]  { background-position-y: calc(var(--size) * -3); }
+entity[dir=nw] { background-position-y: calc(var(--size) * -4); }
+entity[dir=ne] { background-position-y: calc(var(--size) * -5); }
+entity[dir=sw] { background-position-y: calc(var(--size) * -6); }
+entity[dir=se] { background-position-y: calc(var(--size) * -7); }
 
 @keyframes walk {
 	0%   { background-position-x: 0; }

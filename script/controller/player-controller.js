@@ -92,7 +92,7 @@ export class PlayerController extends Controller {
 
 	isWater(x, y) {
 		const game = this.#game
-		const field = game.get(game.normalizeX(x), game.normalizeX(y))
+		const field = game.get(game.normalizeX(x), game.normalizeY(y))
 		return field != null && field.getAttribute(ATTR_TYPE) == 'water'
 	}
 
